@@ -3,10 +3,13 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-async function resetAutoincrement() {
-    await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name = 'User'`;
-    await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name = 'Post'`;
-    await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name = 'Comment'`;
+async function resetSequences() {
+    // Reset the sequence for the User table
+    await prisma.$executeRaw`SELECT setval(pg_get_serial_sequence('"User"', 'id'), coalesce(max("id"), 0) + 1, false) FROM "User"`;
+    // Reset the sequence for the Post table
+    await prisma.$executeRaw`SELECT setval(pg_get_serial_sequence('"Post"', 'id'), coalesce(max("id"), 0) + 1, false) FROM "Post"`;
+    // Reset the sequence for the Comment table
+    await prisma.$executeRaw`SELECT setval(pg_get_serial_sequence('"Comment"', 'id'), coalesce(max("id"), 0) + 1, false) FROM "Comment"`;
   }
 
 async function main() {
@@ -14,9 +17,9 @@ async function main() {
     await prisma.comment.deleteMany({});
     await prisma.post.deleteMany({});
     await prisma.user.deleteMany({});
-
-     // Reset auto-increment counters
-  await resetAutoincrement();
+    
+      // Reset the sequences
+  await resetSequences();
 
   // Check if Alice exists
   const existingAlice = await prisma.user.findUnique({

@@ -1,0 +1,10 @@
+// async function resetAutoincrement() {
+//     await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name = 'User'`;
+//     await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name = 'Post'`;
+//     await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name = 'Comment'`;
+//   }
+
+
+
+     // Reset auto-increment counters for sqlite
+//   await resetAutoincrement();

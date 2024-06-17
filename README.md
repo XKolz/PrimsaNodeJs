@@ -6,7 +6,9 @@ Prisma is a powerful ORM that simplifies database interactions and provides a ro
 
 If you have any specific questions or need further examples on certain features, feel free to ask!
 
-This project demonstrates setting up a Node.js application with Prisma, defining complex models, seeding the database with initial data, and performing advanced queries.
+<!-- This project demonstrates setting up a Node.js application with Prisma, defining complex models, seeding the database with initial data, and performing advanced queries. -->
+This project demonstrates setting up a Node.js application with Prisma, defining complex models, seeding the database with initial data, and performing advanced queries with PostgreSQL.
+
 
 ## Table of Contents
 - [Setup](#setup)
@@ -16,6 +18,7 @@ This project demonstrates setting up a Node.js application with Prisma, defining
 - [Seed the Database](#seed-the-database)
 - [Advanced Queries](#advanced-queries)
 - [View the Database](#view-the-database)
+- [Express API](#express-api)
 
 ## Setup
 
@@ -401,3 +404,27 @@ File: transaction.js
 
 
 node transaction.js
+
+
+Example curl Commands
+curl -X POST http://localhost:3000/users \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Alice", "email": "alice@example.com", "bio": "Software Developer"}'
+
+Get all users:
+curl http://localhost:3000/users
+
+Get a single user by ID:
+curl http://localhost:3000/users/1
+
+Update a user by ID:
+curl -X PUT http://localhost:3000/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Alice Smith", "email": "alice.smith@example.com", "bio": "Senior Software Developer"}'
+
+Delete a user by ID:
+curl -X DELETE http://localhost:3000/users/1
+
+
+
+This README file includes instructions for setting up the project, defining models, running migrations, seeding the database, performing advanced queries, and using pgAdmin to view the database. It also provides information on the Express API endpoints and how to interact with them.
